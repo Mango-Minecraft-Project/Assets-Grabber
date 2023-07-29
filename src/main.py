@@ -24,9 +24,8 @@ for jar_path in (CURRENT_PATH / "mods").glob("*.jar"):
     with ZipFile(jar_path, "r") as jar:
         for member in jar.namelist():
             if not member.endswith("/") and member.startswith("assets/"):
-                current_file_path = current_result_path / member
-                current_file_path.parent.mkdir(parents=True, exist_ok=True)
-                jar.extract(member, current_file_path)
+                current_result_path.parent.mkdir(parents=True, exist_ok=True)
+                jar.extract(member, current_result_path)
                 total_file_count += 1
                 GLOBAL_TOTAL_FILE_COUNT += 1
     if not [*current_result_path.iterdir()]:
